@@ -61,9 +61,9 @@ public class Labo {
 			"}";
 	}
 
-	public void AfficheOrdi(Ordinateur new_ordinateur){
-		for (Ordinateur ordinateur : this.getListeOrdi()) {
-			ordinateur.Affiche();
+	public void AfficheOrdi(){
+			for(int i=0; i<this.getNbreOrdi();i++){
+			this.getListeOrdi()[i].Affiche();
 		}
 	}
 
@@ -71,13 +71,14 @@ public class Labo {
 		// set a counter to 0
 		double counter = 0;
 
-		for (Ordinateur ordinateur : this.getListeOrdi()) {
+		for(int i=0; i<this.getNbreOrdi();i++){
 			// then increment it with every cost of pc's
-			counter+=ordinateur.Cout();
+			counter+=this.getListeOrdi()[i].Cout();
 		}
 
 		return counter;
 	}
+
 
 	public void AjoutOrdi(Ordinateur new_ordinateur){
 		// if the liste is alread full we back off
@@ -85,11 +86,11 @@ public class Labo {
 		
 		// if the PC is alread exists we back off
 		for (Ordinateur ordinateur : this.getListeOrdi()) {
-			if(ordinateur.equals(new_ordinateur)) return;
+			if(ordinateur != null && ordinateur.equals(new_ordinateur)) return;
 		}
 
 		// otherwise we add the new pc
-		listeOrdi[this.getNum()] = new_ordinateur;
+		listeOrdi[this.getNbreOrdi()] = new_ordinateur;
 
 		// then we increment the number of pc's
 		this.setNbreOrdi(this.getNbreOrdi()+1);
@@ -124,19 +125,25 @@ public class Labo {
 		// otherwise we return the pc
 		return this.getListeOrdi()[index];
 	}
-
+	
 	public void SuppOrdi(int indice){
 		// if the liste is empty then we back off
 		if (this.getNbreOrdi() == 0) return;
 
 		// if the index is off the limit then we back off
 		if (indice >= this.getNbreOrdi() || indice < 0) return; 
-
+		
 		
 		// Shift elements to the left, overwriting the element at the specified index.
 		for (int i = indice; i < this.getListeOrdi().length - 1; i++) {
-				this.getListeOrdi()[i] = this.getListeOrdi()[i + 1];
+			this.getListeOrdi()[i] = this.getListeOrdi()[i + 1];
 		}
+
+		// Set the last element to null to clear it
+		this.getListeOrdi()[this.getNbreOrdi() - 1] = null;
+
+		// we increment the counter for pc's
+		this.setNbreOrdi(this.getNbreOrdi()-1);
 	}
 
 	public void SuppOrdi(String numSerie){
@@ -152,20 +159,20 @@ public class Labo {
 		int number_of_results = 0;
 
 		// we loop for the whole liste
-		for (Ordinateur ordinateur : this.getListeOrdi()) {
+		for(int i=0; i<this.getNbreOrdi(); i++){
 			// incrementing the counter for each valid pc marque
-			if(ordinateur.getMarque().equals(marque)) number_of_results++;
+			if(this.getListeOrdi()[i].getMarque().equals(marque)) number_of_results++;
 		}
 		
 		// we use the counter to initialize the result array
 		Ordinateur[] liste_of_ordinateur_of_marque = new Ordinateur[number_of_results];
-
-		int i = 0;
+		
+		int j = 0;
 		// we loop the whole list again
-		for (Ordinateur ordinateur : this.getListeOrdi()) {
+		for(int i=0; i<this.getNbreOrdi(); i++){
 			// filling it with the pc's with the wanted "marque"
-			if(ordinateur.getMarque().equals(marque))
-				liste_of_ordinateur_of_marque[i] = ordinateur;
+			if(this.getListeOrdi()[i].getMarque().equals(marque))
+				liste_of_ordinateur_of_marque[j] = this.getListeOrdi()[i];
 		}
 		
 		return liste_of_ordinateur_of_marque;
