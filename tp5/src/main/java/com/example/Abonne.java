@@ -64,12 +64,8 @@ public class Abonne {
 			"}";
 	}
 
-	public String getNumDefault(int index){
-		// if the index is out of range we return null
-		if( index < 0 || index > 4 ) return null;
-		
-		// otherwise we return the value
-		return this.numTel[index];
+	public String getNumDefault(){
+		return numTel[numDef];
 	}
 
 	public int indiceNum(String phoneNumber){
