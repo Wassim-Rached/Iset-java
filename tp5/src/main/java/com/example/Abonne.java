@@ -1,5 +1,7 @@
 package com.example;
 
+import java.util.Arrays;
+
 public class Abonne {
 	private String nom;
 	private String[] numTel;
@@ -57,7 +59,7 @@ public class Abonne {
 	public String toString() {
 		return "{" +
 			" nom='" + getNom() + "'" +
-			", numTel[]='" + getNumTel() + "'" +
+			", numTel[]='" + Arrays.toString(getNumTel()) + "'" +
 			", nbNum='" + getNbNum() + "'" +
 			", numDef='" + getNumDef() + "'" +
 			", favoris='" + getFavoris() + "'" +
@@ -104,10 +106,16 @@ public class Abonne {
 		// we loop for the whole 'abonne' Number of telephones
 		for (String phoneNumber__abonne : abonne.getNumTel()) {
 
+			// we need to check if the instance isn't null
+			if(phoneNumber__abonne == null) continue;
+			
 			// and we loop for the whole 'this' Number of telephones
 			// for each phone number of the 'abonne'
 			for (String phoneNumber__this : abonne.getNumTel()) {
-
+				
+				// we need to check if the instance isn't null here too
+				if(phoneNumber__this == null) continue;
+				
 				// now we compare every single phone number of 'abonne'
 				// to every other phone number of 'this'
 				// and when we find a common phone number we return true
