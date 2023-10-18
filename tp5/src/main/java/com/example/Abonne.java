@@ -10,12 +10,12 @@ public class Abonne {
 	public Abonne() {
 	}
 
-	public Abonne(String nom, int nbNum, int numDef, boolean favoris) {
+	public Abonne(String nom, int numDef, boolean favoris,String numTel) {
 		this.nom = nom;
-		this.nbNum = nbNum;
 		this.numDef = numDef;
 		this.favoris = favoris;
 		this.numTel = new String[5];
+		this.numTel[this.nbNum++]=numTel;
 	}
 
 	public String getNom() {
@@ -30,17 +30,10 @@ public class Abonne {
 		return this.numTel;
 	}
 
-	public void setNumTel(String numTel[]) {
-		this.numTel = numTel;
-	}
-
 	public int getNbNum() {
 		return this.nbNum;
 	}
 
-	public void setNbNum(int nbNum) {
-		this.nbNum = nbNum;
-	}
 
 	public int getNumDef() {
 		return this.numDef;
@@ -50,9 +43,6 @@ public class Abonne {
 		this.numDef = numDef;
 	}
 
-	public boolean isFavoris() {
-		return this.favoris;
-	}
 
 	public boolean getFavoris() {
 		return this.favoris;
@@ -62,10 +52,6 @@ public class Abonne {
 		this.favoris = favoris;
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		return true;
-	}
 
 	@Override
 	public String toString() {
@@ -74,8 +60,70 @@ public class Abonne {
 			", numTel[]='" + getNumTel() + "'" +
 			", nbNum='" + getNbNum() + "'" +
 			", numDef='" + getNumDef() + "'" +
-			", favoris='" + isFavoris() + "'" +
+			", favoris='" + getFavoris() + "'" +
 			"}";
 	}
+
+	public String getNumDefault(int index){
+		// if the index is out of range we return null
+		if( index < 0 || index > 4 ) return null;
+		
+		// otherwise we return the value
+		return this.numTel[index];
+	}
+
+	public int indiceNum(String phoneNumber){
+		// we loop for the whole numTel liste
+		for (int i = 0; i < this.nbNum; i++) {
+			// if we find the number we return it immediately
+			if(this.numTel[i].equals(phoneNumber)) return i;
+		}
+
+		// if we got here it means the phone number is not found
+		// we return -1 as result
+		return -1;
+	}
+
+	public boolean addNum(String phoneNumber){
+		// if the array of phone numbers is full we back off with false
+		if(this.nbNum >= this.nbNum ) return false;
+		// if the phone number already exists we back off with false too
+		if(indiceNum(phoneNumber) != -1) return false;
+
+		// otherwise we add the phone number and return true
+		this.numTel[this.nbNum++] = phoneNumber;
+		return true;
+	}
+
+	public boolean modifNum(int index,String phoneNumber){
+		// if the index is out of range we return null
+		if(index < 0 || index > 4) return false;
+
+		// otherwise we update the phone number and return true
+		this.numTel[index] = phoneNumber;
+		return true;
+	}
+
+	public boolean isCommun(Abonne abonne){
+		// we loop for the whole 'abonne' Number of telephones
+		for (String phoneNumber__abonne : abonne.getNumTel()) {
+
+			// and we loop for the whole 'this' Number of telephones
+			// for each phone number of the 'abonne'
+			for (String phoneNumber__this : abonne.getNumTel()) {
+
+				// now we compare every single phone number of 'abonne'
+				// to every other phone number of 'this'
+				// and when we find a common phone number we return true
+				if(phoneNumber__abonne.equals(phoneNumber__this)) return true;
+			}
+		}
+
+		// if we got to this point we know that there is not single common
+		// phone number so we return false
+		return false;
+	}
+
+
 
 }
