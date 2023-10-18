@@ -111,7 +111,7 @@ public class Abonne {
 			
 			// and we loop for the whole 'this' Number of telephones
 			// for each phone number of the 'abonne'
-			for (String phoneNumber__this : abonne.getNumTel()) {
+			for (String phoneNumber__this : this.getNumTel()) {
 				
 				// we need to check if the instance isn't null here too
 				if(phoneNumber__this == null) continue;
