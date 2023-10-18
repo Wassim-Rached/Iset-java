@@ -12,12 +12,12 @@ public class Abonne {
 	public Abonne() {
 	}
 
-	public Abonne(String nom, int numDef, boolean favoris,String numTel) {
+	public Abonne(String nom, boolean favoris,String numTel) {
 		this.nom = nom;
-		this.numDef = numDef;
 		this.favoris = favoris;
 		this.numTel = new String[5];
 		this.numTel[this.nbNum++]=numTel;
+		this.setNumDef(0);
 	}
 
 	public String getNom() {
@@ -42,6 +42,7 @@ public class Abonne {
 	}
 
 	public void setNumDef(int numDef) {
+		if(numDef < 0 | numDef >= this.nbNum) return;
 		this.numDef = numDef;
 	}
 
