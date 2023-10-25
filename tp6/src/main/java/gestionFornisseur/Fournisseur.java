@@ -104,7 +104,7 @@ public class Fournisseur {
 
 		int nombreProduitsNonLivres = 0;
 		for (int i = 0; i < tab.length; i++) {
-			if(this.tab[i].isLivraison())
+			if(!this.tab[i].isLivraison())
 				nombreProduitsNonLivres++;
 		}
 		
@@ -112,7 +112,7 @@ public class Fournisseur {
 		
 		int k = 0;
 		for (int i = 0; i < tab.length; i++) {
-			if(this.tab[i].isLivraison())
+			if(!this.tab[i].isLivraison())
 				produitsNonLivres[k++] = this.tab[i];
 		}
 
