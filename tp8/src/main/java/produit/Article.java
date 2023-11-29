@@ -1,5 +1,8 @@
 package produit;
 
+import Exceptions.PrixException;
+import Exceptions.TVAException;
+
 public class Article {
 	protected String Code;
 	protected String Designation;
@@ -7,10 +10,14 @@ public class Article {
 	protected Double TVA;
 	protected String Famille;
 
-	public Article(String Code, String Designation, Double Prix, Double TVA, String Famille) {
+	public Article(String Code, String Designation, Double Prix, Double TVA, String Famille) throws TVAException,PrixException  {
 		this.Code = Code;
 		this.Designation = Designation;
+		if (Prix < 0) throw new PrixException("Prix doit être positif");
 		this.Prix = Prix;
+		if (TVA < 0 || TVA > 1) {
+			throw new TVAException("TVA doit être entre 0 et 1");
+		}
 		this.TVA = TVA;
 		this.Famille = Famille;
 	}

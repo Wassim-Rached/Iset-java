@@ -2,6 +2,7 @@ package vente;
 
 import java.util.Arrays;
 
+import Exceptions.AjoutException;
 import produit.Article;
 import produit.ArticleLot;
 
@@ -14,8 +15,11 @@ public class Magasin {
 		nbarticle = 0;
 	}
 
-	public int Ajout(Article article){
-		if (nbarticle >= Stock.length) return 1;
+	public int Ajout(Article article)throws AjoutException{
+		if (nbarticle >= Stock.length){
+			throw new AjoutException("Stock plein");
+		}
+		
 		for (int i = 0; i < nbarticle; i++) {
 			if (Stock[i].equals(article)) return -1;
 		}
